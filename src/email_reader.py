@@ -6,7 +6,7 @@ from pathlib import Path
 from src.config import SUPPORTED_EXTENSIONS
 from src.models import Email
 
-# заголовки в txt (русские и английские)
+# в txt бывает subject или тема
 HEADER_NAMES = {
     "subject": "subject",
     "from": "from",
@@ -117,7 +117,7 @@ class EmailReader:
         mail.body = str(data.get("body", ""))
 
     def _parse_eml(self, mail, text):
-        # модуль email разбирает .eml (учили на семинаре)
+        # eml через стандартный email
         msg = email.message_from_string(text, policy=policy.default)
         mail.subject = str(msg.get("Subject", ""))
         mail.sender = str(msg.get("From", ""))
